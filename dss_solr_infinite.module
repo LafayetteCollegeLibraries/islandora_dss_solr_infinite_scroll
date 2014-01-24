@@ -1,0 +1,69 @@
+<?php
+
+  /**
+   * @file Core functionality for infinite scrolling
+   * @author griffinj@lafayette.edu
+   *
+   */
+
+require_once dirname(__FILE__) . '/theme/theme.inc';
+
+/*
+ * Page callback for Islandora Solr Results
+ * @see islandora_solr()
+ *
+ * @global IslandoraSolrQueryProcessor $_islandora_solr_queryclass
+ *   the IslandoraSolrQueryProcessor object which includes the current query
+ *   settings and the raw Solr results.
+ * @param $query
+ *   The query string
+ * @return
+ *   A rendered Solr display
+ *
+ * @see hook_menu()
+ */
+
+function _dss_solr_infinite_results($query) {
+
+  drupal_load('module', 'islandora_solr');
+
+  // Url parameters.
+  $params = $_GET;
+
+  if(!array_key_exists('token', $_GET) or !drupal_valid_token($_GET['token'], 'infinite')) {
+
+    return drupal_access_denied();
+  }
+
+  if(array_key_exists('format', $params) and $params['format'] == 'json') {
+
+    global $_islandora_solr_queryclass;
+
+    // Build and execute Apache Solr query.
+    // this populates the GLOBAL!!!!!!!
+    $_islandora_solr_queryclass = new IslandoraSolrQueryProcessor();
+    $_islandora_solr_queryclass->buildAndExecuteQuery($query, $params);
+
+    return drupal_json_output($_islandora_solr_queryclass->islandoraSolrResult);
+  } else {
+
+    //drupal_add_http_header('Content-Type', 'text/xml; utf-8');
+    print islandora_solr($query);
+    exit;
+  }
+}
+
+/**
+ * Implements hook_menu_alter().
+ *
+ */
+function dss_solr_infinite_menu() {
+
+  $items = array('islandora/infinite' => array('page callback' => '_dss_solr_infinite_results',
+					       'access arguments' => array('search islandora solr'),
+					       'type' => MENU_CALLBACK
+					       ),
+		 );
+
+  return $items;
+  }

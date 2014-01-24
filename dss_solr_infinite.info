@@ -1,0 +1,13 @@
+name = Islandora Solr Infinite Scrolling for the Lafayette College Libraries
+description = Extended Islandora Solr functionality refactored as a Drupal Module
+package = Islandora Search
+core = 7.x
+project = "dss_solr_infinite"
+
+dependencies[] = islandora
+dependencies[] = islandora_solr
+dependencies[] = search
+
+; JavaScript Dependencies
+scripts[] = 'js/jquery-ias.js'
+scripts[] = 'js/dss_solr_infinite.js'
