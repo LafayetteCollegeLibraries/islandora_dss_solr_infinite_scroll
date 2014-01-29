@@ -35,6 +35,28 @@ IslandoraDssSolrInfinite.prototype = {
 
     Drupal.behaviors.islandoraDssSolrInfinite = function(context) {
 
+	$('.islandora-view-list').click(function(e) {
+
+		e.preventDefault();
+		
+		$.get(document.URL, {display: 'list'}, function(data) {
+
+			$('.islandora-solr-search-results').empty().append(
+									   $(data).find('.islandora-solr-search-results').children());
+		    });
+	    });
+
+	$('.islandora-view-grid').click(function(e) {
+
+		e.preventDefault();
+		
+		$.get(document.URL, {display: 'grid'}, function(data) {
+
+			$('.islandora-solr-search-results').empty().append(
+									   $(data).find('.islandora-solr-search-results').children());
+		    });
+	    });
+
 	// Abstract and refactor
 	var infiniteList = new IslandoraDssSolrInfinite($, Drupal.settings.dssSolrInfinite);
     };
