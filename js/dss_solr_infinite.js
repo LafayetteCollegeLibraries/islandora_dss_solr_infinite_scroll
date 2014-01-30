@@ -39,13 +39,13 @@ var IslandoraDssSolrInfinite = function($, options) {
 		    loader: '<div class="dss-solr-infinite-loader"><img src="' + this.options.modulePath + '/images/loader.gif" /></div>'
 		    }));
 
+    /*
     var that = this;
 
     //$('.islandora-solr-facet-list li a').click(function(e) {
     this.facetLinkHandler = function(e) {
 
 	e.preventDefault();
-
 
 	var facetedSearchAnchor = $(this);
 	//var facetedSearchUrl = $(this).attr('href');
@@ -64,6 +64,7 @@ var IslandoraDssSolrInfinite = function($, options) {
     };
 
     $('.islandora-solr-facet-list li a').click(that.facetLinkHandler);
+    */
 };
 
 IslandoraDssSolrInfinite.prototype = {
