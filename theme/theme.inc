@@ -8,6 +8,8 @@
 
 function dss_solr_infinite_preprocess_html(&$variables) {
 
+  drupal_add_library('system', 'ui.slider');
+
   $settings = array('token' => drupal_get_token('infinite'),
 		    'modulePath' => base_path() . drupal_get_path('module', 'dss_solr_infinite'));
 
