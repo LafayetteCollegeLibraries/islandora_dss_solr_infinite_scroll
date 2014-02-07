@@ -83,8 +83,14 @@ IslandoraDssSolrInfinite.prototype = {
 	$('.islandora-view-list').click(function(e) {
 
 		e.preventDefault();
-		
-		$.get(document.URL, {display: 'list'}, function(data) {
+
+		// AJAX-integrated
+		var url = $(document).data('islandoraDssDateRangeSlider')['query'] || '/islandora/search/*:*';
+		var params = $(document).data('islandoraDssDateRangeFacetParams') || {};
+		params = $.extend(params, { display: 'list' });
+
+		//$.get(document.URL, {display: 'list'}, function(data) {
+		$.get(url, params, function(data) {
 
 			$('.islandora-solr-search-results').empty().append(
 									   $(data).find('.islandora-solr-search-results').children());
@@ -94,8 +100,14 @@ IslandoraDssSolrInfinite.prototype = {
 	$('.islandora-view-grid').click(function(e) {
 
 		e.preventDefault();
-		
-		$.get(document.URL, {display: 'grid'}, function(data) {
+
+		// AJAX-integrated
+		var url = $(document).data('islandoraDssDateRangeSlider')['query'] || '/islandora/search/*:*';
+		var params = $(document).data('islandoraDssDateRangeFacetParams') || {};
+		params = $.extend(params, { display: 'grid' });
+
+		//$.get(document.URL, {display: 'grid'}, function(data) {
+		$.get(url, params, function(data) {
 
 			$('.islandora-solr-search-results').empty().append(
 									   $(data).find('.islandora-solr-search-results').children());
