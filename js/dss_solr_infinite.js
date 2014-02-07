@@ -97,6 +97,9 @@ IslandoraDssSolrInfinite.prototype = {
 		    });
 	    });
 
+	// Transition for visibility
+	$('.islandora-view-list').toggleClass('shown');
+
 	$('.islandora-view-grid').click(function(e) {
 
 		e.preventDefault();
@@ -113,6 +116,9 @@ IslandoraDssSolrInfinite.prototype = {
 									   $(data).find('.islandora-solr-search-results').children());
 		    });
 	    });
+
+	// Transition for visibility
+	$('.islandora-view-grid').toggleClass('shown');
 
 	// Abstract and refactor
 	var infiniteList = new IslandoraDssSolrInfinite($, Drupal.settings.dssSolrInfinite);

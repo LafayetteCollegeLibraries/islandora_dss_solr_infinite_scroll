@@ -8,6 +8,9 @@ dependencies[] = islandora
 dependencies[] = islandora_solr
 dependencies[] = search
 
+; CSS
+stylesheets[all][] = css/islandora_dss_solr_infinite_scroll.css
+
 ; JavaScript Dependencies
 scripts[] = 'js/jquery-ias.js'
 scripts[] = 'js/dss_solr_infinite.js'
