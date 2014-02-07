@@ -69,7 +69,29 @@ var IslandoraDssSolrInfinite = function($, options) {
 
 IslandoraDssSolrInfinite.prototype = {
 
-    constructor: IslandoraDssSolrInfinite
+    constructor: IslandoraDssSolrInfinite,
+
+    bind: function bind() {
+	
+	/*
+	$.ias($.extend(this.options, {
+		
+		    container: '.islandora-solr-search-result-list',
+		    item: '.islandora-solr-search-result',
+		    pagination: '.pagination',
+		    next: '.islandora-discovery-inner-container .pagination-count .pagination .next a',
+		    loader: '<div class="dss-solr-infinite-loader"><img src="' + this.options.modulePath + '/images/loader.gif" /></div>'
+		}));
+	*/
+
+	return null;
+    },
+
+    unbind: function unbind() {
+
+	var $ = this.$;
+	$.ias().unbind();
+    }
 };
 
 /**
@@ -83,18 +105,26 @@ IslandoraDssSolrInfinite.prototype = {
 	$('.islandora-view-list').click(function(e) {
 
 		e.preventDefault();
+		//infiniteList.unbind();
+		//$.ias().unbind();
 
 		// AJAX-integrated
 		var url = $(document).data('islandoraDssDateRangeSlider')['query'] || '/islandora/search/*:*';
+		/**
+		 * @todo Resolve
+		 *
+		 */
+		url = '/' + url;
 		var params = $(document).data('islandoraDssDateRangeFacetParams') || {};
 		params = $.extend(params, { display: 'list' });
 
 		//$.get(document.URL, {display: 'list'}, function(data) {
 		$.get(url, params, function(data) {
 
-			$('.islandora-solr-search-results').empty().append(
-									   $(data).find('.islandora-solr-search-results').children());
+			$('.islandora-solr-search-results').removeClass('loading').append($(data).find('.islandora-solr-search-results').children());
 		    });
+		$('.islandora-solr-search-results').empty().addClass('loading');
+
 	    });
 
 	// Transition for visibility
@@ -103,25 +133,33 @@ IslandoraDssSolrInfinite.prototype = {
 	$('.islandora-view-grid').click(function(e) {
 
 		e.preventDefault();
+		//infiniteList.unbind();
+		//$.ias().unbind();
 
 		// AJAX-integrated
 		var url = $(document).data('islandoraDssDateRangeSlider')['query'] || '/islandora/search/*:*';
+		/**
+		 * @todo Resolve
+		 *
+		 */
+		url = '/' + url;
 		var params = $(document).data('islandoraDssDateRangeFacetParams') || {};
 		params = $.extend(params, { display: 'grid' });
 
 		//$.get(document.URL, {display: 'grid'}, function(data) {
 		$.get(url, params, function(data) {
 
-			$('.islandora-solr-search-results').empty().append(
-									   $(data).find('.islandora-solr-search-results').children());
+			$('.islandora-solr-search-results').removeClass('loading').append($(data).find('.islandora-solr-search-results').children());
 		    });
+		$('.islandora-solr-search-results').empty().addClass('loading');
+
 	    });
 
 	// Transition for visibility
 	$('.islandora-view-grid').toggleClass('shown');
 
 	// Abstract and refactor
-	var infiniteList = new IslandoraDssSolrInfinite($, Drupal.settings.dssSolrInfinite);
+	//var infiniteList = new IslandoraDssSolrInfinite($, Drupal.settings.dssSolrInfinite);
     };
 
     // @todo: Refactor

@@ -30,3 +30,11 @@
 
     opacity: 1;
 }
+
+.islandora-solr-search-results.loading {
+
+    background-image: url('../files/loader_65_65.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 128px;
+}
