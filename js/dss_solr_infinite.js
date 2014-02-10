@@ -117,6 +117,7 @@ IslandoraDssSolrInfinite.prototype = {
 		url = '/' + url;
 		var params = $(document).data('islandoraDssDateRangeFacetParams') || {};
 		params = $.extend(params, { display: 'list' });
+		$(document).data('islandoraDssDateRangeFacetParams', params);
 
 		//$.get(document.URL, {display: 'list'}, function(data) {
 		$.get(url, params, function(data) {
@@ -145,6 +146,7 @@ IslandoraDssSolrInfinite.prototype = {
 		url = '/' + url;
 		var params = $(document).data('islandoraDssDateRangeFacetParams') || {};
 		params = $.extend(params, { display: 'grid' });
+		$(document).data('islandoraDssDateRangeFacetParams', params);
 
 		//$.get(document.URL, {display: 'grid'}, function(data) {
 		$.get(url, params, function(data) {
