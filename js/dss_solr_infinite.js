@@ -115,9 +115,28 @@ IslandoraDssSolrInfinite.prototype = {
 		 *
 		 */
 		url = '/' + url;
-		var params = $(document).data('islandoraDssDateRangeFacetParams') || {};
+
+		//var params = $(document).data('islandoraDssDateRangeFacetParams') || {};
+		var params = $(document).data('islandoraDssSolrResultsViewParams') || {};
 		params = $.extend(params, { display: 'list' });
-		$(document).data('islandoraDssDateRangeFacetParams', params);
+		$(document).data('islandoraDssSolrResultsViewParams', params);
+
+		var facetQueries = $(document).data('islandoraDssDateRangeFacetQueries') || {};
+
+		// For facetParams
+		// Refactor
+		var facetParams = {};
+		var facetIndex = 0;
+		for(var key in facetQueries) {
+
+		    for(var k in facetQueries[key]) {
+
+			var facetKey = 'f[' + facetIndex + ']';
+			facetParams[ facetKey ] = key + ":" + facetQueries[key][k];
+			facetIndex++;
+		    }
+		}
+		params = $.extend(params, facetParams);
 
 		//$.get(document.URL, {display: 'list'}, function(data) {
 		$.get(url, params, function(data) {
@@ -144,9 +163,33 @@ IslandoraDssSolrInfinite.prototype = {
 		 *
 		 */
 		url = '/' + url;
+
+		/*
 		var params = $(document).data('islandoraDssDateRangeFacetParams') || {};
 		params = $.extend(params, { display: 'grid' });
 		$(document).data('islandoraDssDateRangeFacetParams', params);
+		*/
+
+		var params = $(document).data('islandoraDssSolrResultsViewParams') || {};
+		params = $.extend(params, { display: 'grid' });
+		$(document).data('islandoraDssSolrResultsViewParams', params);
+
+		var facetQueries = $(document).data('islandoraDssDateRangeFacetQueries') || {};
+
+		// For facetParams
+		// Refactor
+		var facetParams = {};
+		var facetIndex = 0;
+		for(var key in facetQueries) {
+
+		    for(var k in facetQueries[key]) {
+
+			var facetKey = 'f[' + facetIndex + ']';
+			facetParams[ facetKey ] = key + ":" + facetQueries[key][k];
+			facetIndex++;
+		    }
+		}
+		params = $.extend(params, facetParams);
 
 		//$.get(document.URL, {display: 'grid'}, function(data) {
 		$.get(url, params, function(data) {
