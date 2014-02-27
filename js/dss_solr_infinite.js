@@ -30,14 +30,17 @@ var IslandoraDssSolrInfinite = function($, options) {
     this.options = $.extend(options, {
 	});
 
-    $.ias($.extend(this.options, {
-		
+    var ias = $.ias($.extend(this.options, {
+
 		container: '.islandora-solr-search-result-list',
-		    item: '.islandora-solr-search-result',
-		    pagination: '.pagination',
-		    next: '.islandora-discovery-inner-container .pagination-count .pagination .next a',
-		    loader: '<div class="dss-solr-infinite-loader"><img src="' + this.options.modulePath + '/images/loader.gif" /></div>'
-		    }));
+		item: '.islandora-solr-search-result',
+		pagination: '.pagination',
+		triggerPageThreshold: 100000,
+		//next: '.islandora-discovery-inner-container .pagination-count .pagination .next a',
+		next: '.pagination:last-child .next a',
+		loader: '<div class="dss-solr-infinite-loader"><img src="' + this.options.modulePath + '/files/loader_65_65.gif" /></div>',
+
+	    }));
 
     /*
     var that = this;
@@ -204,7 +207,7 @@ IslandoraDssSolrInfinite.prototype = {
 	$('.islandora-view-grid').toggleClass('shown');
 
 	// Abstract and refactor
-	//var infiniteList = new IslandoraDssSolrInfinite($, Drupal.settings.dssSolrInfinite);
+	var infiniteList = new IslandoraDssSolrInfinite($, Drupal.settings.dssSolrInfinite);
     };
 
     // @todo: Refactor
