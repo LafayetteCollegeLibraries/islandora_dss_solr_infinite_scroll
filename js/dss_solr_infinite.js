@@ -121,7 +121,16 @@ IslandoraDssSolrInfinite.prototype = {
 
 		//var params = $(document).data('islandoraDssDateRangeFacetParams') || {};
 		var params = $(document).data('islandoraDssSolrResultsViewParams') || {};
-		params = $.extend(params, { display: 'list' });
+
+		/**
+		 * Integrating List/Grid view widgets
+		 * Refactor into a Global Object (accessed by multiple Modules)
+		 * This resolves DSS-178
+		 *
+		 */
+		var sortParams = $(document).data('islandoraDssSolrResultsSortParams');
+
+		params = $.extend(params, sortParams, { display: 'list' });
 		$(document).data('islandoraDssSolrResultsViewParams', params);
 
 		var facetQueries = $(document).data('islandoraDssDateRangeFacetQueries') || {};
@@ -174,7 +183,16 @@ IslandoraDssSolrInfinite.prototype = {
 		*/
 
 		var params = $(document).data('islandoraDssSolrResultsViewParams') || {};
-		params = $.extend(params, { display: 'grid' });
+
+		/**
+		 * Integrating List/Grid view widgets
+		 * Refactor into a Global Object (accessed by multiple Modules)
+		 * This resolves DSS-178
+		 *
+		 */
+		var sortParams = $(document).data('islandoraDssSolrResultsSortParams');
+
+		params = $.extend(params, sortParams, { display: 'grid' });
 		$(document).data('islandoraDssSolrResultsViewParams', params);
 
 		var facetQueries = $(document).data('islandoraDssDateRangeFacetQueries') || {};
@@ -207,7 +225,7 @@ IslandoraDssSolrInfinite.prototype = {
 	$('.islandora-view-grid').toggleClass('shown');
 
 	// Abstract and refactor
-	var infiniteList = new IslandoraDssSolrInfinite($, Drupal.settings.dssSolrInfinite);
+	//var infiniteList = new IslandoraDssSolrInfinite($, Drupal.settings.dssSolrInfinite);
     };
 
     // @todo: Refactor
