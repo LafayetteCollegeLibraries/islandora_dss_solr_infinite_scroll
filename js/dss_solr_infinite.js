@@ -117,7 +117,12 @@ IslandoraDssSolrInfinite.prototype = {
 		 * @todo Resolve
 		 *
 		 */
-		url = '/' + url;
+		if(/\/browse/.exec(document.URL)) {
+
+		} else {
+		    
+		    url = '/' + url;
+		}
 
 		//var params = $(document).data('islandoraDssDateRangeFacetParams') || {};
 		var params = $(document).data('islandoraDssSolrResultsViewParams') || {};
@@ -151,6 +156,12 @@ IslandoraDssSolrInfinite.prototype = {
 		params = $.extend(params, facetParams);
 
 		//$.get(document.URL, {display: 'list'}, function(data) {
+		/**
+		 * Attempting to resolve issues related to GET parameter parsing
+		 *
+		 */
+		url = url.split('?').shift();
+		
 		$.get(url, params, function(data) {
 
 			$('.islandora-solr-search-results').removeClass('loading').append($(data).find('.islandora-solr-search-results').children());
@@ -174,8 +185,14 @@ IslandoraDssSolrInfinite.prototype = {
 		 * @todo Resolve
 		 *
 		 */
-		url = '/' + url;
+		//rurl = '/' + url;
+		if(/\/browse/.exec(document.URL)) {
 
+		} else {
+		    
+		    url = '/' + url;
+		}
+		
 		/*
 		var params = $(document).data('islandoraDssDateRangeFacetParams') || {};
 		params = $.extend(params, { display: 'grid' });
@@ -213,6 +230,11 @@ IslandoraDssSolrInfinite.prototype = {
 		params = $.extend(params, facetParams);
 
 		//$.get(document.URL, {display: 'grid'}, function(data) {
+		/**
+		 * Attempting to resolve issues related to GET parameter parsing
+		 *
+		 */
+		url = url.split('?').shift();
 		$.get(url, params, function(data) {
 
 			$('.islandora-solr-search-results').removeClass('loading').append($(data).find('.islandora-solr-search-results').children());
